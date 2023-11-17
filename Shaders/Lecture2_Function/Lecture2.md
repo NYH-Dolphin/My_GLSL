@@ -1,7 +1,7 @@
 # Lecture2 Draw Functions
 
 > Adapted from https://thebookofshaders.com/05/
-## Normalize UV Coordinates
+## 1. Normalize UV Coordinates
 
 In the beginning of the `main()` function. We usually **normalize** the our uv coordination:
 
@@ -16,7 +16,7 @@ vec2 uv = gl_FragCoord.xy/u_resolution;
     - `uv.y` is the vertical part 
 - The normalization is essentially the last step of **view transformation** in computer graphics' rasterization
 
-## Basic Function
+## 2. Basic Function
 
 We are going to visualize the normalized value of the x coordinate `uv.x` in two ways
 1. **Brightness**: observe the gradient from black to white
@@ -116,12 +116,12 @@ The result looks like this.
 You can uncomment different function to see what different functions look like.
 <img src="./Lecture2.assets/image-20231116230104170.png" alt="image-20231116230104170" style="zoom: 60%;" />
 
-## Common Functions
+## 3. Common Functions
 ### Step & SmoothStep
 ### Sin & Cos
 ### Extra Functions
 
-## Advanced Shaping Functions
+## 4. Advanced Shaping Functions
 
 ### Polynomial Shaping Functions
 > https://www.flong.com/archive/texts/code/shapers_poly/
@@ -355,6 +355,60 @@ float quadraticThroughAGivenPoint (float x, float a, float b){
 }
 ```
 
+### Exponential Shaping Functions
+
+> http://www.flong.com/archive/texts/code/shapers_exp/
+
 ### Circular & Elliptical Shaping Function
 
+> http://www.flong.com/archive/texts/code/shapers_circ/
+
 ### Bezier and Other Parametric Shaping Functions
+
+> http://www.flong.com/archive/texts/code/shapers_bez/
+
+## 5. Exercise
+
+Implement these functions.
+
+Take a look at the following table of equations made by [Kynd](http://www.kynd.info/log/). See how he is combining functions and their properties to control the values between 0.0 and 1.0.
+
+![image-20231117005827541](./Lecture2.assets/image-20231117005827541.png)
+
+```glsl
+float func = 1. - pow(abs(x), 0.5*6.*abs(sin(u_time)));
+func = pow(cos(3.1415*x/2.0), 0.5*6.*abs(sin(u_time)));
+func = 1.-pow(abs(sin(3.1415*x/2.)), 0.5*6.*abs(sin(u_time)));
+func = pow(min(cos(3.1415*x/2.0), 1.-abs(x)),0.5*6.*abs(sin(u_time)));
+func = 1. - pow(max(0.0, abs(x)*2.-1.), 0.5*6.*abs(sin(u_time)));
+```
+
+## 6. Toolbox
+
+### GraphToy
+
+![Iñigo Quilez - GraphToy (2010)](https://thebookofshaders.com/05/graphtoy.png)
+
+- [GraphToy](http://www.iquilezles.org/apps/graphtoy/): once again [Iñigo Quilez](http://www.iquilezles.org/) made a tool to visualize GLSL functions in WebGL.
+
+### LYGIA Shader Library
+
+- [LYGIA Shader Library](https://lygia.xyz/) a shader library of reusable functions that can be include easily on your projects. 
+- It's very granular, designed for reusability, performance and flexibility. And can be easily be added to any projects and frameworks.
+
+The functions are divided into different categories:
+
+- [`math/`](https://lygia.xyz/math): general math functions and constants: `PI`, `SqrtLength()`, etc.
+- [`space/`](https://lygia.xyz/space): general spatial operations: `scale()`, `rotate()`, etc.
+- [`color/`](https://lygia.xyz/color): general color operations: `luma()`, `saturation()`, blend modes, palettes, color space conversion, and tonemaps.
+- [`animation/`](https://lygia.xyz/animation): animation operations: easing
+- [`generative/`](https://lygia.xyz/generative): generative functions: `random()`, `noise()`, etc.
+- [`sdf/`](https://lygia.xyz/sdf): signed distance field functions.
+- [`draw/`](https://lygia.xyz/draw): drawing functions like `digits()`, `stroke()`, `fill`, etc/.
+- [`sample/`](https://lygia.xyz/sample): sample operations
+- [`filter/`](https://lygia.xyz/filter): typical filter operations: different kind of blurs, mean and median filters.
+- [`distort/`](https://lygia.xyz/distort): distort sampling operations
+- [`simulate/`](https://lygia.xyz/simulate): simulate sampling operations
+- [`lighting/`](https://lygia.xyz/lighting): different lighting models and functions for foward/deferred/raymarching rendering
+- [`geometry/`](https://lygia.xyz/geometry): operation related to geometries: intersections and AABB accelerating structures.
+- [`morphological/`](https://lygia.xyz/morphological): morphological filters: dilation, erosion, alpha and poisson fill.
