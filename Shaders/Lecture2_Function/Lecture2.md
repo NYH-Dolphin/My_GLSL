@@ -276,20 +276,23 @@ The Symmetric Double-Polynomial Sigmoids presented here create an **S-shape** wi
 - flat tangents at 0 and 1
 - the special property that f(0.5) = 0.5
 
-Sigmoids generated with **even** exponents require the following equations:
+Sigmoids generated with **even** exponents require the following equations
 $$
 \begin{aligned}
 & x \leq 0.5: y=\frac{(2 x)^{(2 n)}}{2} \\
 & x>0.5: y=1-\frac{(2 x-2)^{(2 n)}}{2}
 \end{aligned}
 $$
-**Odd** exponents require a slightly different pair of equations:
+
+
+**Odd** exponents require a slightly different pair of equations
 $$
 \begin{aligned}
 & x \leq 0.5: y=\frac{(2 x)^{(2 n+1)}}{2} \\
 & x>0.5: y=1+\frac{(2 x-2)^{(2 n+1)}}{2}
 \end{aligned}
 $$
+
 
 ```glsl
 float doublePolynomialSigmoid (float x, float n){
