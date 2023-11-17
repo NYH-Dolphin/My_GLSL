@@ -279,8 +279,8 @@ The Symmetric Double-Polynomial Sigmoids presented here create an **S-shape** wi
 Sigmoids generated with **even** exponents require the following equations
 $$
 \begin{aligned}
-& x \leq 0.5: y=\frac{(2 x)^{(2 n)}}{2} \\
-& x>0.5: y=1-\frac{(2 x-2)^{(2 n)}}{2}
+& x \leq 0.5: y=\frac{2x^{2n}}{2} \\
+& x > 0.5: y=1-\frac{(2x-2)^{2n}}{2}
 \end{aligned}
 $$
 
@@ -288,8 +288,8 @@ $$
 **Odd** exponents require a slightly different pair of equations
 $$
 \begin{aligned}
-& x \leq 0.5: y=\frac{(2 x)^{(2 n+1)}}{2} \\
-& x>0.5: y=1+\frac{(2 x-2)^{(2 n+1)}}{2}
+& x \leq 0.5: y=\frac{2x^{2n+1}}{2} \\
+& x>0.5: y=1+\frac{(2x-2)^{2n+1}}{2}
 \end{aligned}
 $$
 
