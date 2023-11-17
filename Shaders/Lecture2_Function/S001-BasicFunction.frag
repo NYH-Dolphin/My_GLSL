@@ -20,14 +20,14 @@ float plot_func(vec2 uv, float func) {
 
 void main() {
     // normalization
-	vec2 uv = gl_FragCoord.xy/u_resolution;
-
-    // extract the x variable
+    vec2 uv = gl_FragCoord.xy/u_resolution;
+    // extract the x and y variable
     float x = uv.x;
     float y = uv.y;
+
     // try different functions!
     /////////////////////////////////////////////////////////
-    float func = x ;
+    float func = x;
     // func = x*x;
     // func = pow(x,5.0);
     // func = smoothstep(0.1,0.9,x);
@@ -58,5 +58,5 @@ void main() {
 
     // here we mix the color_bright and color_func
     vec3 color = mix(color_bright, color_func, c_func);
-	gl_FragColor = vec4(color,1.0);
+    gl_FragColor = vec4(color,1.0);
 }
