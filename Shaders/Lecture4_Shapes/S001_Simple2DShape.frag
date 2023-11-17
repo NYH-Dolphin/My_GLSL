@@ -42,21 +42,18 @@ float triangle(vec2 uv, vec2 pos, int n, float size){
     return c;
 }
 
-
-float tirangle(vec2 uv){
-    return 0.0;
-}
-
 void main(){
     // normalization
-    vec2 uv = gl_FragCoord.xy/u_resolution;
-    uv -= .5;
-    uv.x *= u_resolution.x/u_resolution.y;
+    vec2 st = gl_FragCoord.xy/u_resolution;
+    st = mix(vec2((st.x*u_resolution.x/u_resolution.y)-(u_resolution.x*.5-u_resolution.y*.5)/u_resolution.y,st.y), 
+             vec2(st.x,st.y*(u_resolution.y/u_resolution.x)-(u_resolution.y*.5-u_resolution.x*.5)/u_resolution.x), 
+             step(u_resolution.x,u_resolution.y));
 
-    float c_r = rectangle(uv, vec4(-.1, .1, -.1, .1)) - rectangle(uv, vec4(-.08, .08, -.08, .08));
-    float c_c = circle(uv, vec2(-.4, .0), .1, .01) - circle(uv, vec2(-.4, .0), .08, .01);
-    float c_t = triangle(uv, vec2(.4, -0.03), 3, .07) - triangle(uv, vec2(.4, -0.03), 3, .05);
+    // draw the shape
+    float c_r = rectangle(st, vec4(.4, .6, .4, .6)) - rectangle(st, vec4(.42, .58, .42, .58));
+    float c_c = circle(st, vec2(.2, .5), .1, .01) - circle(st, vec2(.2, .5), .08, .01);
+    float c_t = triangle(st, vec2(.8, .47), 3, .07) - triangle(st, vec2(.8, .47), 3, .05);
     float c = c_r + c_c + c_t;
     vec3 color = c * vec3(1.,0., 0.);
-    gl_FragColor = vec4(color, 1.0);
+    gl_FragColor = vec4(vec3(color), 1.0);
 }
