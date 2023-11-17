@@ -22,13 +22,27 @@ void main() {
     // normalization
 	vec2 uv = gl_FragCoord.xy/u_resolution;
 
-    // this is the function, you can try different 
-    float func = uv.x;
-    // func = uv.x*uv.x;
-    // func = pow(uv.x,5.0);
-    // func = smoothstep(0.1,0.9,uv.x);
-    // func = smoothstep(0.2,0.5,uv.x) - smoothstep(0.5,0.8,uv.x);
-    // func = sin(15.*uv.x)/2.+.5;
+    // extract the x variable
+    float x = uv.x;
+    float y = uv.y;
+    // try different functions!
+    /////////////////////////////////////////////////////////
+    float func = x ;
+    // func = x*x;
+    // func = pow(x,5.0);
+    // func = smoothstep(0.1,0.9,x);
+    // func = smoothstep(0.2,0.5,x) - smoothstep(0.5,0.8,x);
+    // func = sin(15.*x)/2.+.5;
+    // func = mod(x, .5);
+    // func = fract(3.*x);
+    // func = ceil(x);
+    // func = floor(x);
+    // func = sign(x*2.-1.);
+    // func = abs(2.*(x-.5));
+    // func = clamp(x*x*2., 0., 1.);
+    // func = min(0., x);
+    // func = max(0., x);
+    /////////////////////////////////////////////////////////
 
     // Plot a line
     /*
