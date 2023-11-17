@@ -285,8 +285,9 @@ $$
 & x > 0.5: y=1-\frac{(2x-2)^{2n}}{2}
 \end{aligned}
 $$
-**Odd** exponents require a slightly different pair of equations
 
+
+**Odd** exponents require a slightly different pair of equations
 
 $$
 \begin{aligned}
