@@ -32,7 +32,7 @@ void main(){
 
     // Map the angle (-PI to PI) to the Hue (from 0 to 1)
     // and the Saturation to the radius
-    vec3 color = hsb2rgb(vec3((angle/TWO_PI)+0.5, radius, .4*sin(2.*u_time)+.6));
+    vec3 color = hsb2rgb(vec3((angle/TWO_PI)+0.5, radius, 1.));
 
     color = mix(color, vec3(1.), m_circle);
 
