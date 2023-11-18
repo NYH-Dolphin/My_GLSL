@@ -43,7 +43,7 @@ float triangle(vec2 uv, vec2 pos, int n, float size){
 }
 
 void main(){
-    // normalization
+    // normalization (well, this normalization is super good)
     vec2 st = gl_FragCoord.xy/u_resolution;
     st = mix(vec2((st.x*u_resolution.x/u_resolution.y)-(u_resolution.x*.5-u_resolution.y*.5)/u_resolution.y,st.y), 
              vec2(st.x,st.y*(u_resolution.y/u_resolution.x)-(u_resolution.y*.5-u_resolution.x*.5)/u_resolution.x), 
