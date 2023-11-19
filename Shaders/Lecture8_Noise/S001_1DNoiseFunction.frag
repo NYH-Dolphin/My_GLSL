@@ -18,6 +18,7 @@ float plot_func(vec2 uv, float func) {
           smoothstep( func, func+blur, uv.y);
 }
 
+// change different random functions to see different effects
 float random (vec2 st) {
     return fract(sin(dot(st.xy, vec2(12.9898,78.233)))* 99999.5453123);
 }

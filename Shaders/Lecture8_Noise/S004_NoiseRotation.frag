@@ -30,9 +30,7 @@ vec2 random2vec(vec2 st){
 // 2D Noise based on Morgan McGuire @morgan3d
 // https://www.shadertoy.com/view/4dS3Wd
 float noise1 (in vec2 st) {
-    st.x *= u_resolution.x/u_resolution.y;
-    st *= 100.0;
-    st += 20.*u_time;
+    st += u_time;
     vec2 i = floor(st);
     vec2 f = fract(st);
 
@@ -56,8 +54,6 @@ float noise1 (in vec2 st) {
 
 
 float noise2 (in vec2 st) {
-    st.x *= u_resolution.x/u_resolution.y;
-    st *= 5.0;
     st += u_time;
     vec2 i = floor(st);
     vec2 f = fract(st);
@@ -83,8 +79,6 @@ float noise2 (in vec2 st) {
 
 // gradient noise
 float noise3(vec2 st) {
-    st.x *= u_resolution.x/u_resolution.y;
-    st *= 10.;
     st += u_time;
     vec2 i = floor(st);
     vec2 f = fract(st);
@@ -99,16 +93,31 @@ float noise3(vec2 st) {
 }
 
 
+float lines(in vec2 pos, float b){
+    float scale = 10.0;
+    pos *= scale;
+    return smoothstep(0.0,.5+b*.5,abs((sin(pos.x*3.1415)+b*2.0))*.5);
+}
+
+mat2 rotate2d(float angle){
+    return mat2(cos(angle),-sin(angle),
+                sin(angle),cos(angle));
+}
 
 void main() {
     vec2 st = gl_FragCoord.xy/u_resolution.xy;
+    st.x *= u_resolution.x/u_resolution.y;
+    vec2 pos = st.xy * 3.;
 
-    // try different noise function
-    float n = noise3(st);
-    n = noise3(vec2(n)); // nesting noise
-
-    // Time varying pixel color
-    vec3 col = 0.5 + 0.5*cos(u_time+st.xyx+vec3(0,2,4));
-
-    gl_FragColor = vec4(col * n, 1.0);
+    // apply noise to translate
+    pos += noise3(pos);
+    // apply noise to rotation
+    pos = rotate2d(noise3(pos)) * pos;
+    // move horizontally
+    pos.x += u_time;
+    float c_line = lines(pos, .5);
+    vec3 color_blue = vec3(0.14, 0.22, 0.45);
+    vec3 color_white = vec3(0.78, 0.95, 0.93);
+    vec3 color = mix(color_blue, color_white, c_line);
+    gl_FragColor = vec4(color, 1.0);
 }
