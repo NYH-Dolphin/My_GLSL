@@ -85,7 +85,7 @@ float noise2 (in vec2 st) {
 float noise3(vec2 st) {
     st.x *= u_resolution.x/u_resolution.y;
     st *= 10.;
-    st += u_time;
+    st.x += u_time;
     vec2 i = floor(st);
     vec2 f = fract(st);
 
@@ -110,5 +110,5 @@ void main() {
     // Time varying pixel color
     vec3 col = 0.5 + 0.5*cos(u_time+st.xyx+vec3(0,2,4));
 
-    gl_FragColor = vec4(col * n, 1.0);
+    gl_FragColor = vec4(vec3(n), 1.0);
 }

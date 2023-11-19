@@ -2,9 +2,11 @@
 precision mediump float;
 #endif
 
+
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
+uniform sampler2D myTexture;
 
 // 2D Random
 float random (in vec2 st) {
@@ -79,7 +81,6 @@ float noise2 (in vec2 st) {
 
 // gradient noise
 float noise3(vec2 st) {
-    st += u_time;
     vec2 i = floor(st);
     vec2 f = fract(st);
 
@@ -114,10 +115,10 @@ void main() {
     // apply noise to rotation
     pos = rotate2d(noise3(pos)) * pos;
     // move horizontally
-    pos.x += u_time;
+    pos.x += .1*u_time;
     float c_line = lines(pos, .5);
-    vec3 color_blue = vec3(0.14, 0.22, 0.45);
-    vec3 color_white = vec3(0.78, 0.95, 0.93);
-    vec3 color = mix(color_blue, color_white, c_line);
-    gl_FragColor = vec4(color, 1.0);
+    // vec3 color_blue = vec3(0.14, 0.22, 0.45);
+    // vec3 color_white = vec3(0.78, 0.95, 0.93);
+    // vec3 color = mix(color_blue, color_white, c_line);
+    gl_FragColor = vec4(vec3(c_line), 1.0);
 }
